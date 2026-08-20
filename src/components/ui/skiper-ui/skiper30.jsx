@@ -21,26 +21,30 @@ const Skiper30 = ({ techs }) => {
 
   useEffect(() => {
     const lenis = new Lenis();
+    let rafId;
     const raf = (time) => {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     };
     const resize = () => {
       setDimension({ width: window.innerWidth, height: window.innerHeight });
     };
     window.addEventListener("resize", resize);
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
     resize();
     return () => {
       window.removeEventListener("resize", resize);
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
     };
   }, []);
 
 
-  const col1 = techs.slice(0, 4);
-  const col2 = techs.slice(4, 8);
-  const col3 = techs.slice(8, 12);
-  const col4 = techs.slice(12, 15);
+  const colSize = Math.ceil(techs.length / 4);
+  const col1 = techs.slice(0, colSize);
+  const col2 = techs.slice(colSize, colSize * 2);
+  const col3 = techs.slice(colSize * 2, colSize * 3);
+  const col4 = techs.slice(colSize * 3);
 
   return (
     <div className="w-full bg-black text-white relative">

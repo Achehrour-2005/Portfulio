@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import { Skiper30 } from "@/components/ui/skiper-ui/skiper30";
 import { Skiper54Projects } from "@/components/ui/skiper-ui/skiper54Projects";
 import { CertificationGrid } from "@/components/ui/CertificationGrid";
+import { HackathonSection } from "@/components/ui/HackathonSection";
+import { HackathonDetails } from "@/components/HackathonDetails";
+import { hackathons } from "@/data/hackathons";
 import { ProjectDetails } from "@/components/ProjectDetails";
+import silhouetteImg from "./assets/silhouette.png";
 import visionguideImg from "./assets/2.PNG";
 import maskImg from "./assets/mask1.PNG";
 import moroccoImg from "./assets/morocco1.PNG";
@@ -26,6 +31,9 @@ import ecommerce3Img from "./assets/ecommerce3.PNG";
 import ecommerce4Img from "./assets/ecommerce4.PNG";
 import studyImg from "./assets/study1.PNG";
 import study2Img from "./assets/study2.PNG";
+import greenLeaf1Img from "./assets/pcs_agri1.png";
+import greenLeaf2Img from "./assets/pcs_agri2.jpeg";
+import greenLeaf3Img from "./assets/pcs_agri3.jpeg";
 const projects = [
     { 
       id: '001', 
@@ -178,6 +186,27 @@ const projects = [
         'Tailwind CSS'
       ]
     },
+    { 
+      id: '009', 
+      title: 'GREENLEAF AI', 
+      tech: 'Laravel 12 / React Native / FastAPI', 
+      status: 'Production', 
+      img: greenLeaf1Img,
+      gallery: [greenLeaf1Img, greenLeaf2Img, greenLeaf3Img],
+      role: 'FULL STACK & DEEP LEARNING ENGINEER',
+      description: 'GreenLeafAI is an advanced agricultural ecosystem built with a Laravel 12 (PHP 8.2) REST API backend that handles database registry, authentication, and detailed AI diagnostics through LLM integrations.',
+      featuresText: 'The system features a React Native and Expo field inspection mobile application supporting native camera capture and offline synchronization with SQLite caching, alongside a responsive dashboard designed with Vite and React using Tailwind CSS v4 and Recharts. Date palm health classification is powered by a high-performance FastAPI microservice serving deep learning models (including EfficientNet classifiers) via ONNX Runtime for real-time tree disease detection, with the entire multi-container service orchestrated using Docker Compose and Dokploy for production deployment.',
+      techStackDetails: [
+        'Laravel 12 / PHP 8.2 (REST API)',
+        'React Native & Expo (TypeScript)',
+        'FastAPI Microservice & ONNX Runtime',
+        'EfficientNet Classifiers (Deep Learning)',
+        'Vite / React Admin Dashboard',
+        'Tailwind CSS v4 & Recharts',
+        'SQLite Caching & Offline Sync',
+        'Docker Compose & Dokploy Deployment'
+      ]
+    },
   ];
 
   const techs = [
@@ -187,11 +216,15 @@ const projects = [
     { name: 'Java', id: 'java' },
     { name: 'Python', id: 'py' },
     { name: 'React.js', id: 'react' },
-    { name: 'Node.js', id: 'nodejs' },
+    { name: 'Angular', id: 'angular' },
     { name: 'Next.js', id: 'nextjs' },
+    { name: 'Nest.js', id: 'nestjs' },
+    { name: 'Node.js', id: 'nodejs' },
+    { name: 'Spring Boot', id: 'spring' },
     { name: 'HTML5', id: 'html' },
     { name: 'CSS3', id: 'css' },
     { name: 'JavaScript', id: 'js' },
+    { name: 'TypeScript', id: 'ts' },
     { name: 'SQL', id: 'mysql' },
     { name: 'NoSQL', id: 'mongodb' },
     { name: 'PHP', id: 'php' },
@@ -218,8 +251,25 @@ const projects = [
     { id: '0-017', title: 'Probability and Statistics', issuer: 'DeepLearning.AI', desc: 'Statistical analysis and probability theory for data science and AI.', link: 'https://www.coursera.org/account/accomplishments/verify/ZKAEFCKZXAFG' },
   ];
 
+let savedScrollY = 0;
+
 function Home() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, savedScrollY);
+    const timer = setTimeout(() => {
+      window.scrollTo(0, savedScrollY);
+    }, 50);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="font-outfit">
@@ -235,16 +285,16 @@ function Home() {
 
           <div className="relative flex-1 w-full mt-4 z-10 md:hidden">
             <img
-              src="/silhouette.png"
+              src={silhouetteImg}
               alt="Profile Silhouette"
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] sm:w-full h-full object-contain object-bottom scale-[1.50] origin-bottom"
             />
           </div>
 
           <img
-            src="/silhouette.png"
+            src={silhouetteImg}
             alt="Profile Silhouette"
-            className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[150%] lg:w-[180%] h-[90%] lg:h-[100%] object-cover object-bottom z-0"
+            className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] lg:w-[130%] xl:w-[140%] h-[95%] lg:h-full object-cover object-bottom z-0"
           />
           
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-primary-red via-primary-red/80 to-transparent md:hidden z-[5]"></div>
@@ -279,15 +329,38 @@ function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:flex md:justify-between w-full px-6 md:px-16 py-6 md:py-8 absolute bottom-0 z-30 pointer-events-none gap-y-4 md:gap-0 bg-gradient-to-t from-primary-red to-transparent md:bg-none">
-          <div className="text-[0.65rem] md:text-2xl lg:text-4xl font-extrabold uppercase text-white pointer-events-auto cursor-pointer tracking-widest md:tracking-normal">CODE</div>
-          <div className="text-[0.65rem] md:text-2xl lg:text-4xl font-extrabold uppercase text-white pointer-events-auto cursor-pointer text-right md:text-left tracking-widest md:tracking-normal">DESIGN</div>
-          <div className="text-[0.65rem] md:text-2xl lg:text-4xl font-extrabold uppercase text-black pointer-events-auto cursor-pointer tracking-widest md:tracking-normal">VISUAL ~</div>
-          <div className="text-[0.65rem] md:text-2xl lg:text-4xl font-extrabold uppercase text-black pointer-events-auto cursor-pointer text-right md:text-left tracking-widest md:tracking-normal">SYSTEMS</div>
+        {/* HERO BOTTOM SECTION NAVBAR */}
+        <div 
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="flex flex-nowrap overflow-x-auto md:overflow-x-visible md:justify-between items-end w-full px-6 sm:px-8 md:px-10 lg:px-16 py-5 sm:py-6 md:py-8 absolute bottom-0 z-30 pointer-events-auto gap-8 md:gap-2 bg-gradient-to-t from-primary-red via-primary-red/90 to-transparent md:bg-none scrollbar-none"
+        >
+          {[
+            { label: 'ABOUT', target: 'about', sub: '01 / PROFILE' },
+            { label: 'EDUCATION', target: 'education', sub: '02 / ACADEMIC' },
+            { label: 'PROJECTS', target: 'projects', sub: '03 / WORK' },
+            { label: 'HACKATHONS', target: 'hackathons', sub: '04 / HONORS' },
+            { label: 'CERTIFICATIONS', target: 'certifications', sub: '05 / CERTS' },
+            { label: 'TECHNOLOGIES', target: 'technologies', sub: '06 / STACK' },
+            { label: 'LANGUAGES', target: 'languages', sub: '07 / GLOBAL' },
+          ].map((nav) => (
+            <button
+              key={nav.target}
+              onClick={() => scrollToSection(nav.target)}
+              className="group flex flex-col items-start shrink-0 cursor-pointer text-left transition-all duration-300 hover:scale-105"
+            >
+              <span className="text-[0.45rem] sm:text-[0.5rem] md:text-[0.55rem] font-mono font-bold tracking-wider sm:tracking-widest uppercase text-white/50 group-hover:text-white transition-opacity">
+                {nav.sub}
+              </span>
+              <span className="text-xs sm:text-sm md:text-sm lg:text-base xl:text-xl font-extrabold uppercase text-white tracking-tight group-hover:text-white/80 transition-all whitespace-nowrap">
+                {nav.label}
+              </span>
+              <div className="h-[2px] w-0 group-hover:w-full bg-white transition-all duration-500 mt-1" />
+            </button>
+          ))}
         </div>
       </section>
 
-      <section className="min-h-[50vh] md:min-h-screen bg-black p-6 sm:p-8 md:p-24 flex flex-col justify-center relative overflow-hidden">
+      <section id="about" className="min-h-[50vh] md:min-h-screen bg-black p-6 sm:p-8 md:p-24 flex flex-col justify-center relative overflow-hidden">
         <div className="mb-8 md:mb-12">
           <span className="text-primary-red font-bold uppercase tracking-widest text-xs md:text-sm">About Me</span>
         </div>
@@ -312,7 +385,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="min-h-[70vh] bg-black p-6 sm:p-8 md:p-24 flex flex-col justify-center relative border-t border-white/5">
+      <section id="education" className="min-h-[70vh] bg-black p-6 sm:p-8 md:p-24 flex flex-col justify-center relative border-t border-white/5">
         <div className="mb-10 md:mb-16">
           <span className="text-primary-red font-bold uppercase tracking-widest text-xs md:text-sm mb-3 md:mb-4 block">Academic Path</span>
           <h2 className="text-4xl sm:text-5xl md:text-[6rem] font-extrabold text-white leading-tight md:leading-[0.8] uppercase tracking-tighter">
@@ -361,7 +434,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="min-h-[70vh] bg-black p-6 sm:p-8 md:p-16 flex flex-col relative overflow-hidden border-t border-white/5">
+      <section id="projects" className="min-h-[70vh] bg-black p-6 sm:p-8 md:p-16 flex flex-col relative overflow-hidden border-t border-white/5">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-4 md:gap-8">
           <div className="relative">
             <span className="text-primary-red font-bold uppercase tracking-[0.4em] text-[0.6rem] md:text-xs mb-3 md:mb-4 block">Work / Portfolio</span>
@@ -378,11 +451,19 @@ function Home() {
         </div>
 
         <div className="w-full relative z-10">
-          <Skiper54Projects projects={projects} onProjectClick={(p) => navigate(`/project/${p.id}`)} />
+          <Skiper54Projects projects={projects} onProjectClick={(p) => {
+            savedScrollY = window.scrollY;
+            navigate(`/project/${p.id}`);
+          }} />
         </div>
       </section>
 
-      <section className="bg-black p-6 sm:p-8 md:p-24 flex flex-col relative overflow-hidden border-t border-white/5 py-12 md:py-16">
+      <HackathonSection onHackathonClick={(h) => {
+        savedScrollY = window.scrollY;
+        navigate(`/hackathon/${h.id}`);
+      }} />
+
+      <section id="certifications" className="bg-black p-6 sm:p-8 md:p-24 flex flex-col relative overflow-hidden border-t border-white/5 py-12 md:py-16">
         <div className="mb-6 md:mb-8 relative z-10">
           <span className="text-primary-red font-bold uppercase tracking-[0.3em] text-[0.6rem] md:text-xs mb-3 md:mb-4 block opacity-80">Validation / Expertise</span>
           <h2 className="text-4xl sm:text-5xl md:text-[6rem] font-extrabold text-white leading-[0.8] uppercase tracking-tighter">
@@ -398,9 +479,11 @@ function Home() {
           <div className="w-64 h-64 border border-white/20 rounded-full animate-pulse"></div>
         </div>
       </section>
-      <Skiper30 techs={techs} />
+      <div id="technologies">
+        <Skiper30 techs={techs} />
+      </div>
 
-      <section className="bg-black py-16 sm:py-20 md:py-32 border-t border-white/5 relative overflow-hidden">
+      <section id="languages" className="bg-black py-16 sm:py-20 md:py-32 border-t border-white/5 relative overflow-hidden">
         <div className="px-6 sm:px-8 md:px-24 mb-10 md:mb-16 relative z-10">
           <span className="text-primary-red font-bold uppercase tracking-[0.3em] text-[0.6rem] md:text-xs mb-3 md:mb-4 block">Communication / Global</span>
           <h2 className="text-4xl sm:text-5xl md:text-[6rem] font-extrabold text-white leading-[0.8] uppercase tracking-tighter">
@@ -469,11 +552,22 @@ function ProjectRoute() {
   return <ProjectDetails project={project} onClose={() => navigate('/')} />;
 }
 
+function HackathonRoute() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const hackathon = hackathons.find(h => h.id === id);
+
+  if (!hackathon) return <div className="p-8 text-white">Hackathon not found</div>;
+
+  return <HackathonDetails hackathon={hackathon} onClose={() => navigate('/')} />;
+}
+
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/project/:id" element={<ProjectRoute />} />
+      <Route path="/hackathon/:id" element={<HackathonRoute />} />
     </Routes>
   );
 }

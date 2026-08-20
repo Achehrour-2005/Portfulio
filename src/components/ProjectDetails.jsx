@@ -20,9 +20,14 @@ export function ProjectDetails({ project, onClose }) {
   
   useEffect(() => {
     window.scrollTo(0, 0);
+    const scrollTimer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
+
     document.body.style.overflow = 'auto';
     document.documentElement.style.overflow = 'auto';
     return () => {
+      clearTimeout(scrollTimer);
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
     };
@@ -101,7 +106,7 @@ export function ProjectDetails({ project, onClose }) {
                 PRJ — {project.id}
               </span>
             </div>
-            <h1 className="text-[clamp(3rem,10vw,9rem)] font-black leading-[0.88] tracking-[-0.03em] uppercase">
+            <h1 className="text-[2.2rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[7rem] xl:text-[8rem] font-black leading-[0.88] tracking-[-0.03em] uppercase">
               <span className="text-white">{titlePart1}</span>
               {titlePart2 && (
                 <>
@@ -135,7 +140,7 @@ export function ProjectDetails({ project, onClose }) {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-1 pr-2 md:pr-4"
+            className="absolute bottom-4 left-1/2 -translate-x-1/2 lg:bottom-auto lg:left-auto lg:right-8 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-0 z-30 flex flex-row lg:flex-col gap-2.5 p-2 bg-white/70 backdrop-blur-md border border-white/40 rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.15)]"
           >
             {images.map((img, index) => {
               const isActive = activeImage === img.src;
@@ -143,10 +148,10 @@ export function ProjectDetails({ project, onClose }) {
                 <button
                   key={index}
                   onClick={() => setActiveImage(img.src)}
-                  className={`relative overflow-hidden transition-all duration-500 ${
+                  className={`relative overflow-hidden transition-all duration-300 rounded-lg cursor-pointer focus:outline-none ${
                     isActive
-                      ? "w-16 h-10 md:w-36 md:h-24 opacity-100"
-                      : "w-12 h-8 md:w-28 md:h-20 opacity-30 hover:opacity-70 hover:w-16 hover:h-10 md:hover:w-28 md:hover:h-[4.5rem]"
+                      ? "w-16 h-10 md:w-36 md:h-24 opacity-100 border-2 border-primary-red shadow-[0_0_15px_rgba(235,47,47,0.35)] scale-105"
+                      : "w-14 h-9 md:w-32 md:h-22 opacity-65 border border-black/10 hover:opacity-95 hover:scale-[1.03]"
                   }`}
                 >
                   <img
@@ -154,9 +159,6 @@ export function ProjectDetails({ project, onClose }) {
                     alt={img.alt}
                     className="w-full h-full object-cover"
                   />
-                  {isActive && (
-                    <div className="absolute left-0 top-0 bottom-0 w-[2px] md:w-[3px] bg-primary-red" />
-                  )}
                 </button>
               );
             })}
@@ -167,7 +169,7 @@ export function ProjectDetails({ project, onClose }) {
       
       {project.role && (
         <div className="border-y border-white/5">
-          <div className="grid grid-cols-2 md:grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             {[
               { label: "Role", value: project.role },
               { label: "Status", value: project.status },
@@ -177,9 +179,10 @@ export function ProjectDetails({ project, onClose }) {
               <div 
                 key={i} 
                 className={`px-6 md:px-10 py-6 md:py-7 flex flex-col gap-2 border-white/5 
-                  ${i % 2 !== 0 ? 'border-l' : ''} 
-                  ${i > 1 ? 'border-t md:border-t-0' : ''} 
-                  md:border-l md:first:border-l-0
+                  border-t first:border-t-0
+                  sm:border-t-0 sm:even:border-l
+                  sm:[&:nth-child(n+3)]:border-t
+                  md:border-t-0 md:border-l md:first:border-l-0
                 `}
               >
                 <span className="text-[0.5rem] tracking-[0.4em] uppercase text-white/25">{item.label}</span>
