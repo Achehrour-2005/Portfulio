@@ -34,9 +34,36 @@ import study2Img from "./assets/study2.PNG";
 import greenLeaf1Img from "./assets/pcs_agri1.png";
 import greenLeaf2Img from "./assets/pcs_agri2.jpeg";
 import greenLeaf3Img from "./assets/pcs_agri3.jpeg";
+import support1Img from "./assets/support1.PNG";
+import support2Img from "./assets/support2.PNG";
+import support3Img from "./assets/support3.PNG";
+import support4Img from "./assets/support4.PNG";
+
 const projects = [
     { 
       id: '001', 
+      title: 'SMART SUPPORT HUB', 
+      tech: 'React / FastAPI / LangGraph', 
+      status: 'Production', 
+      img: support1Img,
+      gallery: [support1Img, support2Img, support3Img, support4Img],
+      role: 'AI & FULL STACK DEVELOPER',
+      description: 'Smart Support Hub is an event-driven platform for automated, intelligent processing of customer support tickets, featuring multi-agent orchestration and dynamic human escalation.',
+      featuresText: 'Developed an event-driven platform for automated, intelligent processing of customer support tickets. Implemented a multi-agent system (LangGraph) with semantic document search (RAG) via Pinecone and personalized response generation powered by the Gemini API, including a human escalation mechanism integrated into an interactive dashboard. Built with React, FastAPI, LangGraph, Gemini API, Pinecone, Apache Kafka, MySQL, PyJWT, and Docker.',
+      techStackDetails: [
+        'React',
+        'FastAPI',
+        'LangGraph',
+        'Gemini API',
+        'Pinecone',
+        'Apache Kafka',
+        'MySQL',
+        'PyJWT',
+        'Docker'
+      ]
+    },
+    { 
+      id: '002', 
       title: 'MOROCCO MEMORY', 
       tech: 'React / Spring Boot / AI', 
       status: 'Completed', 
@@ -57,7 +84,7 @@ const projects = [
       ]
     },
     { 
-      id: '002', 
+      id: '003', 
       title: 'MASKGUARD SYSTEM DETECTION', 
       tech: 'Python / YOLOv8 / OpenCV', 
       status: 'Live', 
@@ -75,7 +102,7 @@ const projects = [
       ]
     },
     { 
-      id: '003', 
+      id: '004', 
       title: 'AI STUDYPRO', 
       tech: 'LangChain / Flask / React', 
       status: 'Stable', 
@@ -94,7 +121,7 @@ const projects = [
       ]
     },
     { 
-      id: '004', 
+      id: '005', 
       title: 'MEDICAL SOAP GENERATOR', 
       tech: 'Llama 3.2 / LoRA / Python', 
       status: 'Completed', 
@@ -112,7 +139,7 @@ const projects = [
       ]
     },
     { 
-      id: '005', 
+      id: '006', 
       title: 'FANTASY PREMIER LEAGUE', 
       tech: 'LightGBM / Python / ML', 
       status: 'Active', 
@@ -130,7 +157,7 @@ const projects = [
       ]
     },
     { 
-      id: '006', 
+      id: '007', 
       title: 'TACTIX AI PLATFORM', 
       tech: 'React / Flask / LLMs', 
       status: 'In Design', 
@@ -149,7 +176,7 @@ const projects = [
       ]
     },
     { 
-      id: '007', 
+      id: '008', 
       title: 'CLINIC ERP ODOO', 
       tech: 'Odoo 17 / Python / Postgres', 
       status: 'Production', 
@@ -168,7 +195,7 @@ const projects = [
       ]
     },
     { 
-      id: '008', 
+      id: '009', 
       title: 'E-COMMERCE SPORTS', 
       tech: 'React / PHP / MySQL', 
       status: 'Archive', 
@@ -187,7 +214,7 @@ const projects = [
       ]
     },
     { 
-      id: '009', 
+      id: '010', 
       title: 'GREENLEAF AI', 
       tech: 'Laravel 12 / React Native / FastAPI', 
       status: 'Production', 
