@@ -316,8 +316,8 @@ function Home() {
               alt="Profile Silhouette"
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] sm:w-full h-full object-contain object-bottom scale-[1.50] origin-bottom"
               style={{
-                maskImage: 'linear-gradient(to bottom, black 75%, rgba(0,0,0,0.5) 88%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, black 75%, rgba(0,0,0,0.5) 88%, transparent 100%)',
+                maskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
               }}
             />
           </div>
@@ -327,17 +327,17 @@ function Home() {
             alt="Profile Silhouette"
             className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] lg:w-[130%] xl:w-[140%] h-[95%] lg:h-full object-cover object-bottom z-0"
             style={{
-              maskImage: 'linear-gradient(to bottom, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 80%, rgba(0,0,0,0.5) 90%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, black 92%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 92%, transparent 100%)',
             }}
           />
           
-          {/* Subtle gradient & blur at the bottom of the image */}
+          {/* Discret et subtil flou au bas de l'image */}
           <div 
-            className="absolute -left-[15%] w-[130%] lg:-left-[25%] lg:w-[150%] bottom-0 h-28 sm:h-36 md:h-52 pointer-events-none z-[5] bg-gradient-to-t from-primary-red via-primary-red/85 to-transparent backdrop-blur-[4px]"
+            className="absolute -left-[10%] w-[120%] lg:-left-[20%] lg:w-[140%] bottom-0 h-10 sm:h-12 md:h-16 pointer-events-none z-[5] bg-gradient-to-t from-primary-red/90 via-primary-red/30 to-transparent backdrop-blur-[2px]"
             style={{
-              maskImage: 'linear-gradient(to top, black 25%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to top, black 25%, transparent 100%)',
+              maskImage: 'linear-gradient(to top, black 20%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to top, black 20%, transparent 100%)',
             }}
           />
         </div>
